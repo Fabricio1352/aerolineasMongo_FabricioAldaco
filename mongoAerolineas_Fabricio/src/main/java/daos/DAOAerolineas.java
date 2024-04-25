@@ -13,6 +13,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.result.DeleteResult;
 import static com.mongodb.client.model.Updates.*;
@@ -20,6 +21,7 @@ import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
 import modelos.Aerolinea;
+import org.bson.types.ObjectId;
 
 public class DAOAerolineas {
 
@@ -62,6 +64,12 @@ public class DAOAerolineas {
                 .append("economica", aerolinea.isEconomica());
 
         collection.insertOne(d);
+        return true;
+    }
+    
+    public boolean eliminarAerolinea(ObjectId id){
+
+        collection.deleteOne(Filters.eq("_id", id));
         return true;
     }
 }
